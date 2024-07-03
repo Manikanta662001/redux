@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Counter/>
-      <ApiCall/>
+      <ApiCall url={"https://jsonplaceholder.typicode.com/users"}/>
     </div>
   );
 }
