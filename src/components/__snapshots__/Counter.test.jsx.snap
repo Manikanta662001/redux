@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter Component renders correctly and Match the Snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <h4>
+      0
+    </h4>
+    <div>
+      <button>
+        +
+      </button>
+      <button>
+        -
+      </button>
+      <button>
+        RESET
+      </button>
+      <button>
+        + by some delay
+      </button>
+    </div>
+    <input
+      placeholder="Enter A Number"
+      type="number"
+      value="0"
+    />
+    <button>
+      increment by value
+    </button>
+  </div>
+</DocumentFragment>
+`;

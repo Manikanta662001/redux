@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiCall Component renders correctly and Match the Snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <button>
+      Api call
+    </button>
+  </div>
+</DocumentFragment>
+`;

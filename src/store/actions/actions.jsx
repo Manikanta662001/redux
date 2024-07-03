@@ -34,10 +34,10 @@ export const fetchUsersFailure = (errmsg) => {
   return { type: FETCH_USERS_FAILURE, payload: errmsg };
 };
 
-export const fetchUsers = () => {
+export const fetchUsers = (url) => {
   return (dispatch) => {
     dispatch(fetchUsersRequest());
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch(url)
       .then((res) => res.json())
       .then((result) => dispatch(fetchUsersSuccess(result)))
       .catch((err) => dispatch(fetchUsersFailure(err.message)));
