@@ -78,5 +78,6 @@ describe("Counter Component", () => {
     });
     await user.click(valueButton);
     expect(screen.getByRole("heading", { level: 4 })).toHaveTextContent("3");
+    expect(store.getState().counterReducer.countval).toBe(3)
   });
 });

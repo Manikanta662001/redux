@@ -41,7 +41,7 @@ describe("ApiCall Component", () => {
         payload: [{ id: 1, name: "John Doe" }],
       });
     });
-    renderWithProvider(
+    const { store } = renderWithProvider(
       <ApiCall url={"https://jsonplaceholder.typicode.com/users"} />,
       { initialState }
     );
@@ -50,6 +50,9 @@ describe("ApiCall Component", () => {
     const litags = await screen.findAllByRole("listitem");
     expect(litags).toHaveLength(1);
     expect(litags[0]).toHaveTextContent("John Doe");
+    expect(store.getState().apiReducer.users).toEqual([
+      { id: 1, name: "John Doe" },
+    ]);
   });
   test("error while fetching", async () => {
     fetchUsers.mockImplementation(() => (dispatch) => {
@@ -58,12 +61,13 @@ describe("ApiCall Component", () => {
         payload: "Error while Fetching",
       });
     });
-    renderWithProvider(
+    const { store } = renderWithProvider(
       <ApiCall url={"https://jsonplaceholder.typicode.com/users"} />,
       { initialState }
     );
     const apiBtn = screen.getByRole("button", { name: "Api call" });
     await user.click(apiBtn);
     expect(await screen.findByText(/Error while Fetching/)).toBeInTheDocument();
+    expect(store.getState().apiReducer.errormsg).toBe("Error while Fetching");
   });
 });
