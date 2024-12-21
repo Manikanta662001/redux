@@ -1,20 +1,8 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { screen, render, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import apiReducer from "../store/reducers/apiReducer";
-import ApiCall from "./ApiCall";
-import { Provider } from "react-redux";
 import { fetchUsers } from "../store/actions/actions";
-const rootReducer = combineReducers({
-  apiReducer,
-});
-const renderWithProvider = (component, { initialState } = {}) => {
-  const store = configureStore({
-    reducer: rootReducer,
-    preloadedState: initialState,
-  });
-  return { ...render(<Provider store={store}>{component}</Provider>), store };
-};
+import userEvent from "@testing-library/user-event";
+import { renderWithProvider } from "../testUtil";
+import { fireEvent, screen } from "@testing-library/react";
+import ApiCall from "./ApiCall";
 
 jest.mock("../store/actions/actions", () => ({
   fetchUsers: jest.fn(),
@@ -28,7 +16,7 @@ describe("ApiCall Component", () => {
   test("renders correctly and Match the Snapshot", () => {
     const { asFragment } = renderWithProvider(
       <ApiCall url={"https://jsonplaceholder.typicode.com/users"} />,
-      { initialState }
+      initialState
     );
     expect(
       asFragment(<ApiCall url={"https://jsonplaceholder.typicode.com/users"} />)
@@ -43,7 +31,7 @@ describe("ApiCall Component", () => {
     });
     const { store } = renderWithProvider(
       <ApiCall url={"https://jsonplaceholder.typicode.com/users"} />,
-      { initialState }
+      initialState
     );
     const apiBtn = screen.getByRole("button", { name: "Api call" });
     await user.click(apiBtn);
@@ -63,7 +51,7 @@ describe("ApiCall Component", () => {
     });
     const { store } = renderWithProvider(
       <ApiCall url={"https://jsonplaceholder.typicode.com/users"} />,
-      { initialState }
+      initialState
     );
     const apiBtn = screen.getByRole("button", { name: "Api call" });
     await user.click(apiBtn);
